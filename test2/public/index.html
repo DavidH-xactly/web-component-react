@@ -28,7 +28,8 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
-    <top-menu menutitle="Cool menu", menucolor="green"></div>
+    <div id="root"></div>
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
@@ -39,14 +40,5 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-
-    <script>
-      const topMenu = document.querySelector("top-menu");
-
-      setTimeout(() => {
-      topMenu.menuItems = ["Home", "About", "Log out"];
-        console.log('Just sent menu itmes')
-      }, 1000)
-    </script>
   </body>
 </html>
