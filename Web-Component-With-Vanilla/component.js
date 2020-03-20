@@ -13,33 +13,40 @@ class TopMenu extends HTMLElement {
     }
     </style>
     <div id="main-wrapper">
+    <button id="reverse">Reverse Nav</button>
       <div id="title-wrapper"></div>
       <div id="nav-wrapper"></div>
     </div>
     `;
+
+    this.shadowRoot.querySelector("#reverse").addEventListener("click", () => {
+      this.menuItems.reverse();
+      this.createMenuItems(this.listContainer);
+    });
   }
 
   connectedCallback() {
     const menuTitleAttribute = this.getAttribute("menu-title");
     const menuItemsAttribute = this.getAttribute("menu-items");
     if (menuTitleAttribute) this.menuTitle = menuTitleAttribute;
-    if (menuItemsAttribute) this.menuItems = menuItemsAttribute;
+    if (menuItemsAttribute)
+      this.menuItems = menuItemsAttribute.split(",").map(item => item.trim());
 
     this.listContainer = document.createElement("ul");
     this.listTitle = document.createElement("p");
     this.listTitle.textContent = this.menuTitle;
-
-    this.menuItems
-      .split(",")
-      .map(item => item.trim())
-      .forEach(text => {
-        const listItem = document.createElement("li");
-        listItem.textContent = text;
-        this.listContainer.append(listItem);
-      });
-
+    this.createMenuItems(this.listContainer);
     this.shadowRoot.querySelector("#title-wrapper").append(this.listTitle);
     this.shadowRoot.querySelector("#nav-wrapper").append(this.listContainer);
+  }
+
+  createMenuItems(parentEL) {
+    parentEL.innerHTML = "";
+    this.menuItems.forEach(text => {
+      const listItem = document.createElement("li");
+      listItem.textContent = text;
+      parentEL.append(listItem);
+    });
   }
 }
 
