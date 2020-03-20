@@ -5,12 +5,11 @@ import { useMappedState } from "react-use-mapped-state";
 
 interface ITestProps {
   menutitle: string;
-  menucolor: string;
   menuItems: string[];
 }
 
 const Test: React.FC<ITestProps> = props => {
-  const { menutitle, menucolor, menuItems } = props;
+  const { menutitle, menuItems } = props;
   const [{ btnDisabled }, valueSetter] = useMappedState({ btnDisabled: true });
 
   const disableButton = () => {
@@ -39,7 +38,6 @@ class TopMenu extends HTMLElement {
   mountPoint: any;
   componentAttributes: ITestProps = {
     menutitle: "Default Title",
-    menucolor: "orange",
     menuItems: []
   };
   componentProperties: { [key: string]: string[] } = {};
@@ -57,7 +55,6 @@ class TopMenu extends HTMLElement {
   }
 
   attributeChangedCallback(name: any, oldVal: any, newVal: any) {
-    console.log("CALLED?", name, oldVal, newVal);
     (this.componentAttributes as any)[name] = newVal;
 
     this.mountReactApp();
@@ -68,7 +65,6 @@ class TopMenu extends HTMLElement {
   }
 
   set menuItems(newValue) {
-    console.log("MENU ITMES", newValue);
     this.componentProperties.menuItems = newValue;
 
     this.mountReactApp();
