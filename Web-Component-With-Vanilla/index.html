@@ -4,12 +4,38 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title></title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    </style>
     <script src="./component.js"></script>
+    <script src="./modal.js"></script>
   </head>
   <body>
-    <my-component
+    <!-- <my-component
       menu-title="Hello World"
       menu-items="Home, Login, Cart"
-    ></my-component>
+    ></my-component> -->
+    <dh-modal>
+      <div slot="header">
+        <h1>My fantastic Header</h1>
+      </div>
+      <div slot="main">
+        My great body
+      </div>
+      <div slot="footer">
+        My great Footer
+      </div>
+    </dh-modal>
+    <button id="show-modal">Show Modal</button>
+    <script>
+      document.querySelector("#show-modal").addEventListener("click", () => {
+        const customModal = document.querySelector("dh-modal");
+        customModal.trigger();
+      });
+    </script>
   </body>
 </html>
